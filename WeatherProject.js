@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View,TextInput } from 'react-native';
+import { StyleSheet, Text, View,TextInput, ImageBackground } from 'react-native';
 import Forecast from "./Forecast.js";
+import OpenWeatherMap from "./weather/open_weather_map";
 
 export default class App extends React.Component {
 
@@ -11,10 +12,17 @@ export default class App extends React.Component {
 
   _handleTextChange = event => {
     console.log("text changed", event.nativeEvent.text);
-    this.setState({zip: event.nativeEvent.text});
+
+    zip = event.nativeEvent.text;
+    OpenWeatherMap.fetchForecast(zip).then(forecast => {
+      console.log(forecast);
+      this.setState({ forecast: forecast });
+    });
+
     }
 
   render() {
+    // console.log("rendering...");
     let content = null;
     if(this.state.forecast!==null){
       content = (
@@ -26,49 +34,60 @@ export default class App extends React.Component {
       );
     }
     return (
-       <View style={styles.container}>
-           <Text style={styles.welcome}>
-              You input {this.state.zip}
-           </Text>
+      <View style={styles.container}>
+        <ImageBackground
+        source={require("./images/flowers.png")}
+        resizeMode="cover"
+        style={styles.backdrop}>
 
-           <TextInput
-            style={styles.input}
-            onSubmitEditing = {this._handleTextChange }
-           />
+          <View style={styles.overlay}>
 
-           <Text style={styles.instructions}>
-           To get started, edit index.ios.js
-           </Text>
+              <View style={styles.row}>
 
-           <Text style={styles.instructions}>
-           Press Cmd+R to reload,{'\n'}
-           Cmd+D or shake for dev menu
-           </Text>
-       </View>
+                <Text style={styles.mainText}>
+                Current weather for
+                </Text>
+
+                <View style={styles.zipContainer}>
+                 <TextInput
+                 style={[styles.zipCode, styles.mainText]}
+                 onSubmitEditing={event => this._handleTextChange(event)}
+                 />
+                </View>
+
+              </View>
+
+              {content}
+          </View>
+        </ImageBackground>
+      </View>
     );
   }
 }
-
+const baseFontSize = 16;
 const styles = StyleSheet.create({
- container: {
-   flex: 1,
-   justifyContent: 'center',
-   alignItems: 'center',
-   backgroundColor: '#F5FCFF',
+ container: { flex: 1, alignItems: "center", paddingTop: 30 },
+ backdrop: { flex: 1, flexDirection: "column" },
+ overlay: {
+ paddingTop: 5,
+ backgroundColor: "#000000",
+ opacity: 0.5,
+ flexDirection: "column",
+ alignItems: "center"
  },
- welcome: {
-   fontSize: 20,
-   textAlign: 'center',
-   margin: 10,
+ row: {
+ flexDirection: "row",
+ flexWrap: "nowrap",
+ alignItems: "flex-start",
+ padding: 30
  },
- instructions: {
-   textAlign: 'center',
-   color: '#333333',
-   marginBottom: 5,
+ zipContainer: {
+ height: baseFontSize + 10,
+ borderBottomColor: "#DDDDDD",
+ borderBottomWidth: 1,
+ marginLeft: 5,
+ marginTop: 3
  },
- input: {
-  fontSize: 20,
-  borderWidth: 2,
-  height: 40
-},
+ zipCode: { flex: 1, flexBasis: 1, width: 50, height: baseFontSize },
+ mainText: { fontSize: baseFontSize, color: "#FFFFFF" }
 });
