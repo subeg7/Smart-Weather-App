@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View,TextInput } from 'react-native';
+import Forecast from "./Forecast.js";
 
 export default class App extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { zip:""}
+    this.state = { zip:"",forecast:null}
   }
 
   _handleTextChange = event => {
@@ -14,7 +15,16 @@ export default class App extends React.Component {
     }
 
   render() {
-    console.log("rendering:...")
+    let content = null;
+    if(this.state.forecast!==null){
+      content = (
+        <Forecast
+          main = {this.state.forecast.main}
+          description = {this.state.forecast.description}
+          temp= {this.state.forecast.temp}
+          />
+      );
+    }
     return (
        <View style={styles.container}>
            <Text style={styles.welcome}>
