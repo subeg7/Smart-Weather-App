@@ -1,5 +1,5 @@
 
-import Play from "./play";
+import PanRes from "./PanRes";
 
 
-export default Play;
+export default PanRes;

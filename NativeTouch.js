@@ -1,7 +1,7 @@
 import React from "react";
 import {TouchableHighlight,Text,View,StyleSheet} from "react-native";
 
-export default class Play extends React.Component{
+export default class NativeTouch extends React.Component{
 
   constructor(props){
     super(props);
@@ -23,7 +23,7 @@ export default class Play extends React.Component{
     let greenBox = false;
     if(this.state.pressing){
       greenBox = (
-      <Text style={styles.touchable}>
+      <Text style={styles.pressed_out}>
       </Text>);
     }
     return(
