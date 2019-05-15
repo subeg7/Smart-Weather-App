@@ -1,25 +1,49 @@
 import React from "react";
-import {View} from "react-native";
-// import
-// import PanRes from "./PanRes";
-// import WeatherProject from "./WeatherProject";
-// import WeatherProject from "./WeatherProject";
-import MyList from "./MyList";
-import AddButton from "./Add_Button"
+import {View,StyleSheet,Text} from "react-native";
+
+import AddButton from "./addify/Add_Button";
+
 
 export default class App extends React.Component{
   render(){
     return (
-      <AddButton/>
-      // <View>
-      //   <MyList/>
-      // </View>
-      //
-      // <View>
-      //   <MyList/>
-      // </View>
+      <View style={styles.container}>
+        <TextButton>
+              faster
+        </TextButton>
+      </View>
+
     );
   }
 }
 
-// export default MyList;
+class TextButton extends React.Component{
+  render(){
+    return (
+        <Text style={[styles.button, styles.accentText, {color: "#FFFFFF"}]}>
+          {this.props.children}
+        </Text>
+    );
+  }
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flex: 1,
+     alignItems: "center",
+     paddingTop: 30
+  },
+
+  button: {
+    borderRadius:100,
+    backgroundColor: "#99CCFF"
+  },
+
+  accentText: {
+    fontSize: 18,
+    fontWeight: "bold"
+  }
+
+});

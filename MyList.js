@@ -6,16 +6,10 @@ export default class MyList extends React.Component{
     return(
       <View style={styles.container}>
         <Text style={styles.title}>
-          Sunday
+          {this.props.day}
         </Text>
 
-        <Text style={styles.title}>
-          Monday
-        </Text>
 
-        <Text style={styles.title}>
-          Tuesday
-        </Text>
       </View>
     );
   }

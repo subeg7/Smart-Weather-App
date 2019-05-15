@@ -1,7 +1,7 @@
 import React from "react";
 import {TouchableHighlight,Text,View,StyleSheet} from "react-native";
 
-export default class NativeTouch extends React.Component{
+export default class AddButton extends React.Component{
 
   constructor(props){
     super(props);
@@ -11,7 +11,9 @@ export default class NativeTouch extends React.Component{
   }
 
   _pressedIn=()=>{
-    this.setState({dayIndex:dayIndex++});
+    if(this.state.dayIndex>6) this.state.dayIndex=-1;
+    this.setState({dayIndex: ++this.state.dayIndex});
+    console.log(this.state.weekDay[this.state.dayIndex]);
   }
 
 
@@ -32,10 +34,11 @@ export default class NativeTouch extends React.Component{
           style={styles.pressed_out}>
 
             <View style={styles.button}>
-              <Text style={styles.text}>
-                Add Day
+              <Text style={styles.text} >
+                {this.props.title}
               </Text>
             </View>
+
 
         </TouchableHighlight>
 
