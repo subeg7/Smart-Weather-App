@@ -1,17 +1,12 @@
 import React from "react";
 import {View,StyleSheet,Text} from "react-native";
-
-import AddButton from "./addify/Add_Button";
+import FlexBox from "./FlexBox/styles.js"
 
 
 export default class App extends React.Component{
   render(){
     return (
-      <View style={styles.container}>
-        <TextButton>
-              faster
-        </TextButton>
-      </View>
+      <FlexBox/>
 
     );
   }
