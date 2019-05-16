@@ -1,27 +1,16 @@
 import React from "react";
 import {View,StyleSheet,Text} from "react-native";
 import FlexBox from "./FlexBox/styles.js"
+import GeoLocation from "./GeoLocation.js"
 
 
 export default class App extends React.Component{
   render(){
     return (
-      <FlexBox/>
-
+      <GeoLocation/>
     );
   }
 }
-
-class TextButton extends React.Component{
-  render(){
-    return (
-        <Text style={[styles.button, styles.accentText, {color: "#FFFFFF"}]}>
-          {this.props.children}
-        </Text>
-    );
-  }
-}
-
 
 const styles = StyleSheet.create({
   container: {
