@@ -5,10 +5,12 @@ import {View,StyleSheet,Text} from "react-native";
 export default class App extends React.Component{
   constructor(props){
     super(props);
-    this.state={longitude:"",latitude:""}
+    this.state={longitude:"",latitude:"",locationStatus:"notSet"}
   }
 
   _setLocationState(){
+    this.state.locationStatus="Set";
+    // this.setState({locationStatus:"Set"});
     var geoPosition="not set";
       navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -22,6 +24,9 @@ export default class App extends React.Component{
 }
 
   render(){
+    if(this.state.locationStatus=="notSet"){
+      this._setLocationState();
+    }
 
     return (
           <View style={styles.container}>
@@ -30,7 +35,6 @@ export default class App extends React.Component{
           </Text>
 
           <Text>
-            {this._setLocationState()}
             Longitude:  {this.state.longitude}
           </Text>
 
